@@ -19,8 +19,8 @@ public:
 	void SetPrice(int price) { price_ = price; }
 
 	// Getter
-	const string& GetName() { return name_; }
-	int GetPrice() { return price_; }
+	const string& GetName() const { return name_; } 
+	int GetPrice() const { return price_; }
 
 protected:
 	string name_;
