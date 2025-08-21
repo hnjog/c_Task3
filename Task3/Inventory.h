@@ -6,6 +6,7 @@
 // (그래서 Template 함수는 헤더에 선언해야 한다)
 
 #include<iostream>
+#include"ItemBase.h"
 
 using namespace std;
 
@@ -67,10 +68,7 @@ public:
 		size_--;
 	}
 
-	void PrintAllItems() const
-	{
-
-	}
+	void PrintAllItems() const;
 
 	void Assign(const Inventory<T>& other)
 	{
@@ -92,3 +90,20 @@ protected:
 	int capacity_;
 	int size_;
 };
+
+// 기본 템플릿 구현은 비어 있도록
+template <typename T>
+void Inventory<T>::PrintAllItems() const 
+{
+	cout << "뭘 기대하신 거죠?" << '\n';
+}
+
+// ItemBase 일때만 사용 가능한 명시적 특수화
+template<>
+inline void Inventory<ItemBase>::PrintAllItems() const
+{
+	for (int i = 0; i < size_; i++)
+	{
+		pItems_->PrintInfo();
+	}
+}
