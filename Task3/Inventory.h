@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // 템플릿의 정체는
 // 사실 컴파일러가 모든 타입을 검사하고
@@ -32,7 +32,7 @@ public:
 		for (int i = 0; i < size_; ++i) {
 			pItems_[i] = other.pItems_[i];
 		}
-		cout << "인벤토리 복사 완료" << endl;
+		cout << "인벤토리 복사 완료" << '\n';
 	}
 
 	virtual ~Inventory()
@@ -59,7 +59,12 @@ public:
 
 	void RemoveLastItem()
 	{
+		if (size <= 0)
+		{
+			cout << "인벤토리가 비어있습니다." << '\n';
+		}
 
+		size_--;
 	}
 
 	void PrintAllItems() const
