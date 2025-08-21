@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 // 템플릿의 정체는
 // 사실 컴파일러가 모든 타입을 검사하고
@@ -6,6 +6,8 @@
 // (그래서 Template 함수는 헤더에 선언해야 한다)
 
 #include<iostream>
+
+using namespace std;
 
 template<typename T>
 class Inventory
@@ -17,7 +19,7 @@ public:
 	}
 
 	// 복사 생성자
-	Inventory(const Inventory<T>& Other)
+	Inventory(const Inventory<T>& other)
 	{
 		capacity_ = other.capacity_;
 		size_ = other.size_;
