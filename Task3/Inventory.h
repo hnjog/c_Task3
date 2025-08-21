@@ -15,7 +15,12 @@ class Inventory
 public:
 	Inventory(int capacity = 10)
 	{
+		if (capacity < 0)
+			capacity = 1;
 
+		pItems_ = new T[capacity];
+		capacity_ = capacity;
+		size = 0;
 	}
 
 	// 복사 생성자
@@ -32,7 +37,8 @@ public:
 
 	virtual ~Inventory()
 	{
-
+		delete[] pItems_;
+		pItems_ = nullptr;
 	}
 
 public:
