@@ -7,6 +7,7 @@ using namespace std;
 class ItemBase
 {
 public:
+	ItemBase();
 	ItemBase(string name, int price);
 	ItemBase(const ItemBase& other);
 	virtual ~ItemBase();

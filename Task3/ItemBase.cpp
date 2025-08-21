@@ -1,6 +1,12 @@
 ﻿#include "pch.h"
 #include "ItemBase.h"
 
+ItemBase::ItemBase()
+	:name_(""),
+	price_(0)
+{
+}
+
 ItemBase::ItemBase(string name, int price)
 	:name_(name),
 	price_(price)
