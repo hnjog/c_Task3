@@ -8,6 +8,9 @@
     <ClCompile Include="pch.cpp">
       <Filter>pch</Filter>
     </ClCompile>
+    <ClCompile Include="ItemBase.cpp">
+      <Filter>Inventory\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Inventory">
@@ -16,6 +19,9 @@
     <Filter Include="pch">
       <UniqueIdentifier>{9bd44848-92e3-4f41-a8c3-b3c246271337}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inventory\Item">
+      <UniqueIdentifier>{43f0e129-717f-4a1e-a167-3c142daeb7f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inventory.h">
@@ -23,6 +29,9 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>pch</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBase.h">
+      <Filter>Inventory\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
