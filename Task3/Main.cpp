@@ -45,4 +45,25 @@ int main()
     inven1.SortItems();
     cout << "-----Inven 1 상태-----" << '\n';
     inven1.PrintAllItems();
+
+    cout << "-----Inven 1에 아이템 20개 추가하기-----" << '\n';
+    string temp = "Temp 아이템";
+    int itemValue = 50;
+    for (int i = 0; i < 20; i++)
+    {
+        temp.append(to_string(i));
+        itemValue += i;
+        inven1.AddItem({temp,itemValue});
+        temp.pop_back();
+        if (i >= 10)
+            temp.pop_back();
+        itemValue -= i;
+    }
+
+    cout << "Inven 1 용량 : " << inven1.GetCapacity() << '\n';
+    cout << "Inven 1 사이즈 : " << inven1.GetSize() << '\n';
+
+    cout << "-----Inven 1 상태-----" << '\n';
+    inven1.PrintAllItems();
+
 }
