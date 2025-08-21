@@ -21,7 +21,7 @@ public:
 
 		pItems_ = new T[capacity];
 		capacity_ = capacity;
-		size = 0;
+		size_ = 0;
 	}
 
 	// 복사 생성자
@@ -30,9 +30,12 @@ public:
 		capacity_ = other.capacity_;
 		size_ = other.size_;
 		pItems_ = new T[capacity_];
-		for (int i = 0; i < size_; ++i) {
+
+		for (int i = 0; i < size_; ++i) 
+		{
 			pItems_[i] = other.pItems_[i];
 		}
+
 		cout << "인벤토리 복사 완료" << '\n';
 	}
 
@@ -60,7 +63,7 @@ public:
 
 	void RemoveLastItem()
 	{
-		if (size <= 0)
+		if (size_ <= 0)
 		{
 			cout << "인벤토리가 비어있습니다." << '\n';
 		}
@@ -104,6 +107,6 @@ inline void Inventory<ItemBase>::PrintAllItems() const
 {
 	for (int i = 0; i < size_; i++)
 	{
-		pItems_->PrintInfo();
+		pItems_[i].PrintInfo();
 	}
 }
