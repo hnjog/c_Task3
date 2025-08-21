@@ -13,6 +13,8 @@
 // (한번 만들면 이후 cpp 추가할때 이걸 include 해주면 됨)
 // (이후 pch.h 가 수정되면 빌드할때마다 자동으로 새로 만들어준다)
 // 
+// - pch.cpp는 '만들기'로 되어 있을것!
+// 
 // 주의점
 // 
 // 1. 헤더에는 넣지 말자
@@ -32,3 +34,4 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
