@@ -1,2 +1,101 @@
-# c_Task3
-Week2 Task 3
+관련 TIL : https://hnjog.github.io/c++/Week3Task3/<br>
+
+## 클래스 설명
+이전에 구현해둔 Task1의 기반을 가져다 사용<br>
+
+```
+클래스 구조
+
+Inventory
+- 각 요구 기능을 구현한 템플릿 클래스
+
+ItemBase
+- 아이템 용도의 클래스
+- Name, Price를 멤버변수로 가짐
+- 각 요소를 출력하는 Print 함수 존재
+```
+
+추가 파일들<br>
+
+```
+pcp.h , cpp
+- 미리 컴파일 된 헤더 기능 테스트 용
+```
+
+## 트러블 슈팅 1 - 미리 컴파일된 헤더
+
+<img width="2379" height="225" alt="Image" src="https://github.com/user-attachments/assets/dab17769-f896-4835-8cd0-90bc98ed9d40" /><br>
+
+미리 컴파일된 헤더를 사용하던 중<br>
+갑자기 이러한 에러가 발생하였다<br>
+
+<img width="1309" height="557" alt="Image" src="https://github.com/user-attachments/assets/3b68911b-c249-4a69-9129-699b6b59805b" /><br>
+
+하지만 Main에는 딱히 문제가 없어보이는 상황이다<br>
+
+그런데 왜 C1854 에러가 뜨는지 다시 확인해보니...<br>
+
+<img width="1393" height="426" alt="Image" src="https://github.com/user-attachments/assets/fe9bea08-e75e-470a-88c2-91d792b0985f" /><br>
+
+pch.cpp를 만들어 놓았지만<br>
+정작 '미리 컴파일된 헤더' 만들기는 아무도 하지 않고 있었다...<br>
+~~(생산자가 아니라 소비자가 된...)~~<br>
+
+<img width="1397" height="434" alt="Image" src="https://github.com/user-attachments/assets/c05ae22b-6d0d-483c-966a-5ea6e1df5d70" /><br>
+
+.cpp의 해당 옵션을 '만들기'로 바꾸어 주니<br>
+문제가 해결되었다!<br>
+
+## 트러블 슈팅 2 - T 배열 생성 문제
+<img width="2309" height="111" alt="Image" src="https://github.com/user-attachments/assets/b4e411ca-8600-43db-b7b4-30a42dc1e45c" /><br>
+
+Inventory의 복사 생성자를 구현하던 중<br>
+갑자기 위와 같은 컴파일 에러가 발생하였다<br>
+
+<img width="773" height="447" alt="Image" src="https://github.com/user-attachments/assets/1e6ff09e-60dc-441a-85b3-524d4feb027b" /><br>
+
+보아하니 딱히 이상해보이지는 않았기에<br>
+'아 그러고보니 템플릿 함수는 컴파일러가 종종 잘 먹지 않지'라고 생각했었다<br>
+
+(실제로 디버깅 중 size_ 변수가 아니라 size를 자동완성해서<br>
+컴파일 에러를 몇번이고 잡아서 전과가 있는 컴파일러...)<br>
+
+그런데도 계속해서 같은 에러를 내뱉으니<br>
+뭔가 이상하다 싶어<br>
+ItemBase의 생성자를 보았는데<br>
+
+정말 '기본 생성자'가 없었다...<br>
+
+<img width="2134" height="297" alt="Image" src="https://github.com/user-attachments/assets/cc0e72aa-b872-45ed-9f27-04d64fd3e8ae" /><br>
+
+그렇기에 기본 생성자를 생성해주었더니<br>
+문제가 해결되었다!<br>
+
+- 템플릿 클래스는 컴파일러가 종종 코드 에러를 잘 표시해주지 않기도 한다<br>
+- 요새는 배열 대신 Vector를 쓰다 보니<br>
+  저런 식으로 '배열'로 new를 선언할 때의<br>
+  생성자를 미처 생각지 못하였다<br>
+
+- new[] 방식을 사용하려면 해당 클래스의 '기본 생성자'가<br>
+  필요한 점을 숙지해 두자<br>
+  (vector에선 vector<ItemBase> v(Capacity,ItemBase("",10))<br>
+  이런 방식으로 가능하다)<br>
+
+## Tip : 자꾸 파일들이 '한국어'로 인코딩 되어 Git에서 볼때 글짜가 깨진다....?
+Git과 소스코드 파일을 종종 쓰다보면 알겠지만<br>
+'주석'으로 단 한국어가 'Git'으로 보면 '깨져있는 경우'를<br>
+종종 발견한다<br>
+
+물론 나중에 따로 받았을땐 안깨져있지만<br>
+이 문제를 해결 못하나? 싶어<br>
+찾아본 해결책을 소개한다<br>
+(일단 요점은 '인코딩'인점을 기억하자)<br>
+
+1. Visual Studio 상단 메뉴 -> 도구 -> 옵션<br>
+2. 환경 -> 문서<br>
+3. 우측에서 "특정 인코딩을 사용하여 파일 저장" 을 확인<br>
+4. '유니코드(서명 있는 UTF-8) - 코드 페이지 65001 로 변경<br>
+
+이전에 한국어 인코딩으로 주석을 쓴 경우<br>
+커밋을 다시해야 하지만<br>
+Git Desktop으로 볼 때, 깔끔하게 올라가게 된다<br>
