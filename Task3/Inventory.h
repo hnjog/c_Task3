@@ -79,7 +79,20 @@ public:
 
 	void Resize(int newCapacity)
 	{
+		// 더 작은 용량이나 같은 용량으로 resize 하지 않는다
+		if (newCapacity <= capacity_)
+			return;
 
+		T* originItems = pItems_;
+		capacity_ = newCapacity;
+		pItems_ = new T[capacity_];
+		
+		for (int i = 0; i < size_; ++i)
+		{
+			pItems_[i] = originItems[i];
+		}
+
+		delete[] originItems;
 	}
 
 	void SortItems()
