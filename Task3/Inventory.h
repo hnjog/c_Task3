@@ -44,7 +44,13 @@ public:
 public:
 	void AddItem(const T& item)
 	{
+		if (size_ >= capacity_)
+		{
+			Resize(capacity_ * 2);
+		}
 
+		pItems_[size_] = item;
+		size_++;
 	}
 
 	// Getter
