@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // 템플릿의 정체는
 // 사실 컴파일러가 모든 타입을 검사하고
@@ -95,10 +95,7 @@ public:
 		delete[] originItems;
 	}
 
-	void SortItems()
-	{
-
-	}
+	void SortItems();
 
 protected:
 	T* pItems_;
@@ -113,6 +110,13 @@ void Inventory<T>::PrintAllItems() const
 	cout << "뭘 기대하신 거죠?" << '\n';
 }
 
+// 기본 템플릿 구현은 비어 있도록
+template <typename T>
+void Inventory<T>::SortItems()
+{
+	cout << "뭘 기대하신 거죠?" << '\n';
+}
+
 // ItemBase 일때만 사용 가능한 명시적 특수화
 template<>
 inline void Inventory<ItemBase>::PrintAllItems() const
@@ -121,4 +125,14 @@ inline void Inventory<ItemBase>::PrintAllItems() const
 	{
 		pItems_[i].PrintInfo();
 	}
+}
+
+// ItemBase 일때만 사용 가능한 명시적 특수화
+template<>
+inline void Inventory<ItemBase>::SortItems()
+{
+	sort(pItems_, pItems_ + size_, [](const ItemBase& a, const ItemBase& b)
+		{
+			return a.GetPrice() < b.GetPrice();
+		});
 }
