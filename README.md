@@ -1,7 +1,6 @@
 관련 TIL : https://hnjog.github.io/c++/Week3Task3/<br>
 
 ## 클래스 설명
-이전에 구현해둔 Task1의 기반을 가져다 사용<br>
 
 ```
 클래스 구조
