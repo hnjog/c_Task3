@@ -13,6 +13,14 @@ public:
 
 	void PrintInfo() const;
 
+	// Setter
+	void SetName(string&& name) { name_ = move(name); }
+	void SetPrice(int price) { price_ = price; }
+
+	// Getter
+	const string& GetName() { return name_; }
+	int GetPrice() { return price_; }
+
 protected:
 	string name_;
 	int price_;
